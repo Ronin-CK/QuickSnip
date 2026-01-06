@@ -8,19 +8,14 @@ Modern, minimal UI designed to feel native on Hyprland
 
 – Enhanced the region selector with mouse tracking and guides
 <details>
-  <summary>▶ 🎥 Region Selector Demo </summary>
+  <summary>▶ 🎥 Demo </summary>
   <br>
-https://github.com/user-attachments/assets/af8fefd2-a516-4e6d-9326-d7a2dc0ad047
+
+
+https://github.com/user-attachments/assets/aafa197b-111f-4b40-aab4-90a7b66a1ef1
+
+
 </details>
-
-
-<details>
-  <summary>▶ OCR Demo </summary>
-  <br>
-https://github.com/user-attachments/assets/041aef81-a955-4c9c-8276-2322cbc23475
-</details>
-
-
 
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
@@ -36,7 +31,7 @@ https://github.com/user-attachments/assets/041aef81-a955-4c9c-8276-2322cbc23475
 1. **Install Dependencies**
 # Install system tools
 ```bash
-sudo pacman -S grim imagemagick tesseract tesseract-data-eng wl-clipboard libnotify
+sudo pacman -S grim imagemagick tesseract tesseract-data-eng wl-clipboard curl jq libnotify xdg-utils
 ```
 
 # Install Quickshell (from AUR)
