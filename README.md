@@ -8,14 +8,14 @@ Modern, minimal UI designed to feel native on Hyprland
 
 – Enhanced the region selector with mouse tracking and guides
 <details>
-  <summary>▶ Demo video</summary>
+  <summary>▶ 🎥 Region Selector Demo </summary>
   <br>
 https://github.com/user-attachments/assets/af8fefd2-a516-4e6d-9326-d7a2dc0ad047
 </details>
 
 
 <details>
-  <summary>▶ Demo video</summary>
+  <summary>▶ OCR Demo </summary>
   <br>
 https://github.com/user-attachments/assets/041aef81-a955-4c9c-8276-2322cbc23475
 </details>
