@@ -50,4 +50,4 @@ mkdir -p ~/.config/quickshell
 ## ⚙️ Configuration (Hyprland)
 Add this to `hyprland.conf`:
 ```ini
-bindr = SUPER SHIFT, T, exec, quickshell -p ~/.config/quickshell/HyprQuickSnip/UniversalSnip.qml
+bind = Super+Shift, T, exec, quickshell -c HyprQuickSnip -n
