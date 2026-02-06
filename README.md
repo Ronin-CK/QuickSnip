@@ -20,7 +20,6 @@ https://github.com/user-attachments/assets/76a272f5-3851-4c0e-a40a-1e46729e7785
 * `t`: Switch to OCR
 * `g`: Switch to Lens
 * `Escape`: Quit (cleans up temp files)
-* `Left Mouse`: Select region
 
 ## Setup
 
