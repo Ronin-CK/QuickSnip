@@ -23,22 +23,18 @@ PanelWindow {
         const y = Math.round(selector.selectionY * scale);
         const w = Math.round(selector.selectionWidth * scale);
         const h = Math.round(selector.selectionHeight * scale);
-        // Ignore accidental clicks or tiny drags
         if (w < 10 || h < 10)
             return ;
 
         root.visible = false;
         let cmd = "";
         if (root.currentMode === "ocr") {
-            // Tesseract OCR pipeline with whitespace normalization
             const ocrPipeline = [`magick "${root.fullScreenshot}" -crop ${w}x${h}+${x}+${y} -`, `tesseract - - -l eng`, `awk 'BEGIN{RS=""; FS="\\n"; ORS="\\n\\n"} {for(i=1;i<=NF;i++){printf "%s",$i; if(i<NF)printf " "} printf "\\n"}'`, `sed 's/  */ /g; s/[[:space:]]*$//'`, `wl-copy`].join(" | ");
             cmd = `${ocrPipeline} && notify-send 'OCR Complete' 'Text copied to clipboard'`;
         } else {
-            // Fake multipart form submission via local HTML with base64 image
             const buildHtml = [`echo '<html><body style="margin:0;display:flex;justify-content:center;align-items:center;height:100vh;background:#111;color:#fff;font-family:system-ui"><p>Searching with Google Lens…</p><form id="f" method="POST" enctype="multipart/form-data" action="https://lens.google.com/v3/upload"></form><script>'`, `echo "var b=atob('$B64');"`, `echo 'var a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);var d=new DataTransfer();d.items.add(new File([a],"i.jpg",{type:"image/jpeg"}));var inp=document.createElement("input");inp.type="file";inp.name="encoded_image";inp.files=d.files;document.getElementById("f").appendChild(inp);document.getElementById("f").submit();'`, `echo '</script></body></html>'`].join(" ; ");
             cmd = [`magick "${root.fullScreenshot}" -crop ${w}x${h}+${x}+${y} -resize '1000x1000>' -strip -quality 85 "${root.cropJpg}"`, `B64=$(base64 -w0 "${root.cropJpg}")`, `{ ${buildHtml} ; } > "${root.lensHtml}"`, `xdg-open "${root.lensHtml}"`].join(" && ");
         }
-        // Cleanup: Wait a few seconds for the browser to catch up before nuking the HTML
         cmd += ` ; (sleep 3 && rm -f "${root.fullScreenshot}" "${root.cropJpg}" "${root.lensHtml}") &`;
         proc.command = ["sh", "-c", cmd];
         proc.running = true;
@@ -186,7 +182,7 @@ PanelWindow {
         width: 300
         height: 50
         radius: height / 2
-        color: Qt.rgba(0.15, 0.15, 0.15, 0.9)
+        color: Qt.rgba(0.15, 0.15, 0.15, 0.4)
         border.color: Qt.rgba(1, 1, 1, 0.15)
         border.width: 1
         layer.enabled: true
@@ -204,7 +200,7 @@ PanelWindow {
             width: (parent.width - 8) / root.modes.length
             y: 4
             radius: height / 2
-            color: "#3478F6"
+            color: "#cba6f7"
             x: 4 + (root.modes.indexOf(root.currentMode) * width)
 
             Behavior on x {
@@ -249,7 +245,7 @@ PanelWindow {
                             };
                             return icons[modelData] + "  " + labels[modelData];
                         }
-                        color: root.currentMode === modelData ? "white" : "#AAFFFFFF"
+                        color: root.currentMode === modelData ? "#11111b" : "#AAFFFFFF"
                         font.weight: root.currentMode === modelData ? Font.Bold : Font.Medium
                         font.pixelSize: 15
                         font.family: "Symbols Nerd Font"
