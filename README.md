@@ -34,6 +34,11 @@ QuickSnip works on any Linux distribution. You just need the following dependenc
 * `libnotify`
 
 ### Installation (Arch)
+## AUR
+```bash
+yay -S quicksnip-git
+```
+## Manual Installation
 ```bash
 sudo pacman -S grim imagemagick tesseract tesseract-data-eng wl-clipboard curl libnotify xdg-utils
 # Get quickshell from AUR
