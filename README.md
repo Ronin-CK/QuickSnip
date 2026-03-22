@@ -13,6 +13,10 @@ A highly optimized screen snipping, OCR, and routing tool built for Quickshell. 
 * **Google Lens**: Built-in support for grabbing a region and sending it to Google Lens.
 * **Quick Translation**: Instantly translate text snippets using Google Translate.
 * **Copy Modes**: Switch between standard, raw, and single-line formatting on the fly based on your paste destination.
+  * Press `d` to toggle **Direct Copy** (skips word selection and copies entire region).
+  * Press `r` to toggle **Raw Copy** (preserves exact OCR formatting).
+  * Press `s` to toggle **Single Line** (strips newlines).
+
 
 <video src="https://github.com/user-attachments/assets/ef7d56ee-acce-4e03-ac94-194914290589" controls="controls" style="max-width: 100%;">
   Your browser does not support the video tag.
