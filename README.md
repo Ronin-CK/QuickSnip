@@ -14,6 +14,11 @@ A highly optimized screen snipping, OCR, and routing tool built for Quickshell. 
 * **Quick Translation**: Instantly translate text snippets using Google Translate.
 * **Copy Modes**: Switch between standard, raw, and single-line formatting on the fly based on your paste destination.
 
+<video src="https://github.com/user-attachments/assets/ef7d56ee-acce-4e03-ac94-194914290589" controls="controls" style="max-width: 100%;">
+  Your browser does not support the video tag.
+</video>
+  
+
 ## Installation (Arch)
 
 ### AUR (maintained by @knownasnaffy):
@@ -73,12 +78,12 @@ binds {
 bind = $mainMod SHIFT, T, exec, env QT_SCALE_FACTOR=1 QT_AUTO_SCREEN_SCALE_FACTOR=0 quickshell -c QuickSnip -n
 ```
 
-## QuickSnip Sidebar Extension
+## QuickSnip Sidebar Extension  ![Mozilla Add-on Users](https://img.shields.io/amo/users/quicksnip-sidebar?style=flat-square&color=orange)
 
 QuickSnip includes a companion browser extension to handle instant routing into your browser's sidebar.
 
 **Install the extension:**
-* **Firefox / Zen Browser**: [QuickSnip Sidebar on AMO](https://addons.mozilla.org/en-US/firefox/addon/quicksnip-sidebar/) 🚀
+* **Firefox / Zen Browser**: [QuickSnip Sidebar](https://addons.mozilla.org/en-US/firefox/addon/quicksnip-sidebar/) 
 * **Manual**: Load the `extension/` directory as an unpacked extension in your browser.
 
 **How to use:**
