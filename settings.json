@@ -1,0 +1,27 @@
+{
+  "Search": {
+    "engine": "google",
+    "open_in": "sidebar"
+  },
+  "Selection": {
+    "style": "rectangle"
+  },
+  "Translation": {
+    "target_lang": "hi",
+    "open_in": "sidebar"
+  },
+  "AI": {
+    "provider": "chatgpt",
+    "open_in": "sidebar"
+  },
+  "Lens": {
+    "open_in": "newtab"
+  },
+  "Smart": {
+    "ai_threshold": 15,
+    "open_in": "sidebar"
+  },
+  "Browser": {
+    "class": "zen"
+  }
+}
