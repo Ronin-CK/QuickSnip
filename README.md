@@ -74,6 +74,16 @@ binds {
     Mod+Shift+T { spawn "quickshell" "-c" "QuickSnip" "-n"; }
 }
 ```
+### Labwc/LabFyre (`rc.xml`)
+```xml
+<keyboard>
+ <keybind key="W-S-t">
+  <action name="Execute">
+   <command>quickshell -c QuickSnip -n</command>
+  </action>
+ </keybind>
+</keyboard>
+```
 
 **Note on Scaling**: If the selection area looks shifted or wrong, it's probably Qt scaling fighting with the compositor. You can force it to 1 like this:
 
