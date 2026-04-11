@@ -55,7 +55,12 @@ QtObject {
 
             printf '%s' "$TEXT" ${finalPipe}
             rm -f "${tmp}.pnm"
-            notify-send "OCR Complete" "Text copied to clipboard" -t 2000
+            
+            # Show truncated text in notification
+            CLEAN_TEXT=\$(printf '%s' "\$TEXT" | tr '\\n' ' ' | sed 's/  */ /g')
+            TEXT_BODY=\$(printf '%s' "\$CLEAN_TEXT" | head -c 100)
+            [ \${#CLEAN_TEXT} -gt 100 ] && TEXT_BODY="\${TEXT_BODY}..."
+            notify-send "Copied" "\$TEXT_BODY" -t 3000
         `;
     }
 
