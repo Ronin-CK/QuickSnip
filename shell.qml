@@ -322,12 +322,18 @@ ShellRoot {
             FileView {
                 id: settingsFile
                 property string configHome: Quickshell.env("XDG_CONFIG_HOME") || (Quickshell.env("HOME") + "/.config")
-                path: configHome + "/quickshell/QuickSnip/settings.json"
+                property string userPath: configHome + "/quickshell/QuickSnip/settings.json"
+                property string systemPath: "/etc/xdg/quickshell/QuickSnip/settings.json"
+                path: userPath
                 onTextChanged: {
                     try {
                         const raw = (typeof text === 'function') ? text() : text;
-                        if (raw?.trim().length > 0)
+                        if (raw?.trim().length > 0) {
                             settings.source = JSON.parse(raw);
+                        } else if (path === userPath) {
+                            console.log("[QuickSnip] User settings not found, trying system path...");
+                            path = systemPath;
+                        }
                     } catch (e) {
                         console.warn("Failed to parse settings.json:", e);
                     }
