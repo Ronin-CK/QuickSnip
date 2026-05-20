@@ -10,29 +10,32 @@ A fast, native screen snipping, OCR, and routing tool built for Quickshell.
 * **Integrations:** Native send-to Google Lens & Translate.
 * **Format Toggles:** `d` (Direct mode), `r` (Raw OCR layout), `s` (Single-line).
 
-## Installation (Arch)
+## Installation
 
-### AUR (maintained by [@knownasnaffy](https://github.com/knownasnaffy)):
+### Arch Linux
+
+**AUR (maintained by [@knownasnaffy](https://github.com/knownasnaffy)):**
 ```bash
 yay -S quicksnip-git
 ```
 
-### Manual Installation
+**Manual Installation:**
 ```bash
 sudo pacman -S grim imagemagick tesseract tesseract-data-eng wl-clipboard curl libnotify xdg-utils wlrctl wtype
 # Get quickshell from AUR
 yay -S quickshell
 ```
 
-## Other Distros
+### Fedora Linux
 
-### Fedora:
 ```bash
 # Enable COPR repository for quickshell
 sudo dnf copr enable errornointernet/quickshell
-sudo dnf install quickshell grim ImageMagick tesseract tesseract-langpack-eng wl-clipboard curl
+# Install dependencies
+sudo dnf install quickshell grim ImageMagick tesseract tesseract-langpack-eng wl-clipboard curl wtype wlrctl libnotify xdg-utils
 ```
 
+### Other Distros
 For other distros, install the equivalent packages using your package manager (e.g., `apt`, `zypper`). For **quickshell**, follow the [official build instructions](https://github.com/outfoxxed/quickshell) if it's not in your repos.
 
 ### Clone it into your config:
