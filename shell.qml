@@ -27,6 +27,7 @@ ShellRoot {
             property bool cleanupHandled: false
             property real detectedMonitorScale: 1.0
             property var pendingOcrRect: null
+            property bool pendingExecuteAction: false
 
             readonly property bool ctsEnabled: settings.selectionStyle === "circle"
             readonly property real monitorScale: detectedMonitorScale
@@ -146,7 +147,12 @@ ShellRoot {
             function executeAction() {
                 console.log("[QuickSnip] executeAction - screen:", !!targetScreen,
                            "grimReady:", grimReady, "scale:", monitorScale);
-                if (!targetScreen || !grimReady) return;
+                if (!targetScreen) return;
+
+                if (!grimReady) {
+                    pendingExecuteAction = true;
+                    return;
+                }
 
                 const x = Math.round(selector.selectionX * monitorScale);
                 const y = Math.round(selector.selectionY * monitorScale);
@@ -403,7 +409,10 @@ ShellRoot {
                     _output = "";
                     grimReady = true;
                     
-                    if (pendingOcrRect) {
+                    if (pendingExecuteAction) {
+                        pendingExecuteAction = false;
+                        executeAction();
+                    } else if (pendingOcrRect) {
                         if (pendingOcrRect.w !== undefined)
                             startOcr(pendingOcrRect.x, pendingOcrRect.y, pendingOcrRect.w, pendingOcrRect.h);
                         else
