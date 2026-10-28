@@ -18,11 +18,17 @@ Item {
     property real targetY: 0
     property real targetWidth: 0
     property real targetHeight: 0
-    property bool animate: true
 
     signal regionSelected()
     signal fullScreenRequested()
     signal rightClicked()
+
+    function syncSelection() {
+        selectionX = targetX;
+        selectionY = targetY;
+        selectionWidth = targetWidth;
+        selectionHeight = targetHeight;
+    }
 
     property real lastClickTime: 0
 
@@ -106,7 +112,6 @@ Item {
                 root.rightClicked();
                 return ;
             }
-            root.animate = false; // Disable animations initially for the first point
             root.startPos = Qt.point(mouse.x, mouse.y);
             root.path = [Qt.point(mouse.x, mouse.y)];
             root.lastPathPoint = Qt.point(mouse.x, mouse.y);
@@ -118,7 +123,6 @@ Item {
             root.selectionY = mouse.y;
             root.selectionWidth = 0;
             root.selectionHeight = 0;
-            root.animate = true;
             guides.requestPaint();
         }
         onPositionChanged: (mouse) => {
@@ -142,6 +146,7 @@ Item {
                         root.targetY = minY;
                         root.targetWidth = maxX - minX;
                         root.targetHeight = maxY - minY;
+                        root.syncSelection();
                         guides.requestPaint();
                     }
                 } else {
@@ -149,6 +154,7 @@ Item {
                     root.targetY = Math.min(root.startPos.y, boundedY);
                     root.targetWidth = Math.abs(boundedX - root.startPos.x);
                     root.targetHeight = Math.abs(boundedY - root.startPos.y);
+                    root.syncSelection();
                 }
             }
         }
@@ -156,12 +162,7 @@ Item {
             if (mouse.button === Qt.RightButton)
                 return ;
 
-            // Snap the animated properties to their final target values immediately
-            root.animate = false;
-            root.selectionX = root.targetX;
-            root.selectionY = root.targetY;
-            root.selectionWidth = root.targetWidth;
-            root.selectionHeight = root.targetHeight;
+            root.syncSelection();
             guides.requestPaint();
 
             // Ignore tiny accidental clicks, require a meaningful drag
@@ -175,19 +176,6 @@ Item {
                 } else {
                     root.lastClickTime = now;
                 }
-            }
-        }
-
-        // Sync animated properties
-        Timer {
-            interval: 16
-            repeat: true
-            running: mouseArea.pressed
-            onTriggered: {
-                root.selectionX = root.targetX;
-                root.selectionY = root.targetY;
-                root.selectionWidth = root.targetWidth;
-                root.selectionHeight = root.targetHeight;
             }
         }
 
@@ -231,60 +219,6 @@ Item {
                 duration: 100
             }
 
-        }
-
-        Behavior on x {
-            NumberAnimation {
-                duration: 50
-            }
-
-        }
-
-        Behavior on y {
-            NumberAnimation {
-                duration: 50
-            }
-
-        }
-
-    }
-
-    Behavior on selectionX {
-        enabled: root.animate
-
-        SpringAnimation {
-            spring: 4
-            damping: 0.4
-        }
-
-    }
-
-    Behavior on selectionY {
-        enabled: root.animate
-
-        SpringAnimation {
-            spring: 4
-            damping: 0.4
-        }
-
-    }
-
-    Behavior on selectionWidth {
-        enabled: root.animate
-
-        SpringAnimation {
-            spring: 4
-            damping: 0.4
-        }
-
-    }
-
-    Behavior on selectionHeight {
-        enabled: root.animate
-
-        SpringAnimation {
-            spring: 4
-            damping: 0.4
         }
 
     }
